@@ -9,9 +9,11 @@ connectDB()
 app.use(express.json())
 
 app.use(cors({
-  origin: 'https://mini-ecommerce-frontend-eight.vercel.app/',
+  origin: 'https://mini-ecommerce-frontend-eight.vercel.app',
   credentials: true
 }));
+
+app.options('*', cors());
 
 
 const userRoutes = require('./routes/userRoutes')
