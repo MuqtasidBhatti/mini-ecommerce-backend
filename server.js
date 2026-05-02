@@ -6,15 +6,15 @@ const cors = require('cors')
 const app = express()
 connectDB()
 
-app.use(express.json())
-
-app.use(cors({
+const corsOptions = {
   origin: 'https://mini-ecommerce-frontend-eight.vercel.app',
   credentials: true
-}));
+}
 
-app.options('*', cors());
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
+app.use(express.json())
 
 const userRoutes = require('./routes/userRoutes')
 const productRoutes = require('./routes/productRoutes')
