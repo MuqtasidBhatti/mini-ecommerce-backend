@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express')
 const connectDB = require('./config/db')
 const cors = require('cors')
@@ -12,7 +11,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
-app.options('*', cors(corsOptions))
+app.options('(.*)', cors(corsOptions))
 app.use(express.json())
 
 const userRoutes = require('./routes/userRoutes')
@@ -23,4 +22,4 @@ app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/orders', orderRoutes)
 
-module.exports = app;
+module.exports = app
