@@ -13,7 +13,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions))
-
 app.use(express.json())
 
 const userRoutes = require('./routes/userRoutes')
@@ -23,10 +22,5 @@ const orderRoutes = require('./routes/orderRoutes')
 app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/orders', orderRoutes)
-
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-    console.log(`Server is running on localhost:${PORT}`)
-})
 
 module.exports = app;
