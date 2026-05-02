@@ -7,7 +7,10 @@ const app = express()
 connectDB()
 
 app.use(cors({
-  origin: 'https://mini-ecommerce-frontend-eight.vercel.app',
+  origin: [
+    'https://mini-ecommerce-frontend-eight.vercel.app',
+    'http://localhost:5173'
+  ],
   credentials: true
 }))
 
