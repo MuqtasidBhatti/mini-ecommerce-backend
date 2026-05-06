@@ -16,6 +16,7 @@ Node.js, Express, MongoDB, Mongoose, JWT, bcrypt
 
 ## Folder Structure
 
+```
 ├── config/         # MongoDB connection
 ├── controllers/    # orderController, productController, userController
 ├── middleware/     # authMiddleware (protect, admin, optionalAuth)
@@ -23,6 +24,8 @@ Node.js, Express, MongoDB, Mongoose, JWT, bcrypt
 ├── routes/         # API route definitions
 ├── seeder.js       # Seed products into database
 ├── server.js       # Entry point
+
+```
 
 ## API Routes
 
