@@ -3,7 +3,16 @@ const Order = require('../models/Order')
 
 const createOrder = async (req, res) => {
     try {
-        const { orderItems, shippingAddress, paymentMethod, itemsPrice, shippingPrice, taxPrice, totalPrice } = req.body
+        const { 
+            orderItems, 
+            shippingAddress, 
+            paymentMethod, 
+            itemsPrice, 
+            shippingPrice, 
+            taxPrice, 
+            totalPrice,
+            paymentIntentId  // add this
+        } = req.body
 
         if (!orderItems || orderItems.length === 0) {
             return res.status(400).json({ message: "No order items" })
@@ -17,8 +26,12 @@ const createOrder = async (req, res) => {
             itemsPrice,
             shippingPrice,
             taxPrice,
-            totalPrice
-
+            totalPrice,
+            isPaid: true,           // add this
+            paidAt: Date.now(),     // add this
+            paymentResult: {        // add this
+                id: paymentIntentId
+            }
         })
 
         const createdOrder = await order.save()
@@ -26,7 +39,6 @@ const createOrder = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
-
 }
 
 const getOrderById = async (req, res) => {
