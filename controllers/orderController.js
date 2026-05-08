@@ -3,13 +3,13 @@ const Order = require('../models/Order')
 
 const createOrder = async (req, res) => {
     try {
-        const { 
-            orderItems, 
-            shippingAddress, 
-            paymentMethod, 
-            itemsPrice, 
-            shippingPrice, 
-            taxPrice, 
+        const {
+            orderItems,
+            shippingAddress,
+            paymentMethod,
+            itemsPrice,
+            shippingPrice,
+            taxPrice,
             totalPrice,
             paymentIntentId  // add this
         } = req.body
@@ -27,11 +27,9 @@ const createOrder = async (req, res) => {
             shippingPrice,
             taxPrice,
             totalPrice,
-            isPaid: true,           // add this
-            paidAt: Date.now(),     // add this
-            paymentResult: {        // add this
-                id: paymentIntentId
-            }
+            isPaid: paymentMethod === 'Stripe',
+            paidAt: paymentMethod === 'Stripe' ? Date.now() : null,
+            paymentResult: paymentIntentId ? { id: paymentIntentId } : {}
         })
 
         const createdOrder = await order.save()
@@ -78,8 +76,8 @@ const updateOrderToDelivered = async (req, res) => {
 
         order.isDelivered = true
         order.deliveredAt = Date.now()
-        order.isPaid = true  
-        order.paidAt = Date.now()  
+        order.isPaid = true
+        order.paidAt = Date.now()
 
         const updatedOrder = await order.save()
         res.json(updatedOrder)
